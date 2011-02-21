@@ -1,9 +1,7 @@
+require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 $:.unshift File.dirname(__FILE__)
-require 'sinatra'
-require 'erb'
-require 'ruby-debug'
-require 'lib/helpers'
 
+require 'lib/helpers'
 include CurrencyWatcher::Helpers
 
 set :public, Proc.new { File.join(root, "public") }
