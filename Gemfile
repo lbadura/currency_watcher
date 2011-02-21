@@ -5,8 +5,7 @@ gem 'mongo'
 gem 'mongo_mapper'
 gem 'i18n'
 
-group :development, :text do
+group :development, :test do
   gem 'bson_ext'
-  gem 'ruby-debug19'
   gem 'thin'
 end
