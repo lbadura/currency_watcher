@@ -3,6 +3,9 @@ $:.unshift File.dirname(__FILE__)
 require 'rubygems'
 require 'sinatra'
 require 'lib/helpers'
+require 'mongo'
+require 'mongo_mapper'
+
 include CurrencyWatcher::Helpers
 
 set :public, Proc.new { File.join(root, "public") }
