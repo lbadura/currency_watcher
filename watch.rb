@@ -1,6 +1,7 @@
-require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 $:.unshift File.dirname(__FILE__)
 
+require 'rubygems'
+require 'sinatra'
 require 'lib/helpers'
 include CurrencyWatcher::Helpers
 
