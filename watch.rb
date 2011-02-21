@@ -1,10 +1,8 @@
 $:.unshift File.dirname(__FILE__)
-
 require 'rubygems'
 require 'sinatra'
-require 'lib/helpers'
-require 'mongo'
-require 'mongo_mapper'
+require 'helpers'
+require 'config/boot'
 
 include CurrencyWatcher::Helpers
 
@@ -12,6 +10,7 @@ set :public, Proc.new { File.join(root, "public") }
 set :views, Proc.new { File.join(root, "templates") }
 
 get '/' do
+  @currency_rates = CurrencyRate.all
   erb :index, :layout => :application
 end
 
