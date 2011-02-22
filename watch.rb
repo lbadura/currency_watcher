@@ -1,7 +1,7 @@
 $:.unshift File.dirname(__FILE__)
 require 'rubygems'
 require 'sinatra'
-require 'helpers'
+require 'lib/helpers'
 require 'config/boot'
 
 include CurrencyWatcher::Helpers

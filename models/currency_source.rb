@@ -7,5 +7,4 @@ class CurrencySource
   key :updated_at, DateTime
 
   many :currency_rates
-
 end
