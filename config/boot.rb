@@ -31,7 +31,6 @@ module CurrencyWatcher
       require 'dm-core'
       require 'dm-migrations'
       require 'dm-timestamps'
-      require 'mongo_mapper'
       require 'uri'
       require 'yaml'
       require 'ruby-debug' unless production?
