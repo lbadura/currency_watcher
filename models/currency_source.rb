@@ -1,10 +1,11 @@
 class CurrencySource
-  include MongoMapper::Document
+  include DataMapper::Resource
 
-  key :name, String, :required => true
-  key :scraper, String, :required => true
-  key :created_at, DateTime
-  key :updated_at, DateTime
+  property :id, Serial
+  property :name, String, :required => true
+  property :scraper, String, :required => true
+  property :created_at, DateTime
+  property :updated_at, DateTime
 
-  many :currency_rates
+  has n, :currency_rates
 end

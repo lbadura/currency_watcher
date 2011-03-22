@@ -1,4 +1,5 @@
-$:.unshift File.join(File.dirname(__FILE__), '..', 'config')
+config = File.join(File.dirname(__FILE__), '..', 'config')
+$:.unshift config
 require 'boot'
 require 'currency_spy'
 
@@ -25,7 +26,7 @@ class CurrencyHarvester
     scraper.available_codes.each do |code|
       scraper.currency_code = code
       # find or create a currency code
-      currency_code = prepare_db_code(code)
+      currency_code = CurrencyCode.first_or_create(:code => code)
       # get the response from scraper
       response = scraper.fetch_rates
       # create a CurrencyRate object for given response
@@ -38,12 +39,13 @@ class CurrencyHarvester
   end
 
   def valid_rate(response)
-    #TODO: implement
-    return true
+    check = lambda {|rate| rate.nil? || rate.zero? }
+    rates = [:buy_rate, :sell_rate, :medium_rate]
+    !(rates.all? {|rate| check.call(response[rate])})
   end
 
   def create_rate(response, code, source)
-    rate = CurrencyRate.new(:currency_code => code, :date => response[:rate_time], :currency_source => source)
+    rate = CurrencyRate.first_or_new(:currency_code => code, :date => response[:rate_time], :currency_source => source)
     rate.buy_rate = response[:buy_rate]
     rate.sell_rate = response[:sell_rate]
     rate.medium_rate = response[:medium_rate]
@@ -52,12 +54,6 @@ class CurrencyHarvester
       puts "Saved: #{rate.currency_code.code} - #{rate.buy_rate} - #{rate.sell_rate} - #{rate.medium_rate}"
     end
     return rate
-  end
-
-  def prepare_db_code(code)
-    CurrencyCode.ensure_index [[:code, 1]], :unique => true
-    CurrencyCode.create(:code => code)
-    CurrencyCode.where(:code => code).first
   end
 end
 CurrencyHarvester.new.run

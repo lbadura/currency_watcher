@@ -1,6 +1,7 @@
 class CurrencyCode
-  include MongoMapper::Document
+  include DataMapper::Resource
 
-  key :code, String, :required => true
-  many :currency_rates
+  property :id, Serial
+  property :code, String, :required => true
+  has n, :currency_rates
 end

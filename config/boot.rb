@@ -8,19 +8,17 @@ module CurrencyWatcher
     end
 
     def prepare_db
-      env = determine_environment
-      if [:development, :test].include?(env)
-        config_file = YAML.load_file('config/database.yml') 
-        config = config_file[env.to_s]
-        MongoMapper.connection = Mongo::Connection.new(config['hostname'])
-        MongoMapper.database = config['database']
-      else
-        uri = URI.parse(ENV['MONGOHQ_URL'])
-        conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
-        db = conn.db(uri.path.gsub(/^\//, ''))
-      end
+      DataMapper.setup(:default, database_url)
+      DataMapper.auto_upgrade!
+      DataMapper.finalize
     end
 
+    def database_url
+      env = determine_environment
+      config_file = YAML.load_file('config/database.yml')
+      config = config_file[env.to_s]
+      ENV['DATABASE_URL'] || "postgres://#{config['user']}:#{config['password']}@#{config['host']}/#{config['database']}"
+    end
     def prepare_loadpaths
       dirs_to_load = ["models", "lib"]
       dirs_to_load.each do |dir_name|
@@ -30,7 +28,9 @@ module CurrencyWatcher
     end
 
     def require_dependencies
-      require 'mongo'
+      require 'dm-core'
+      require 'dm-migrations'
+      require 'dm-timestamps'
       require 'mongo_mapper'
       require 'uri'
       require 'yaml'

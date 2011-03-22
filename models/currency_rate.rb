@@ -1,12 +1,13 @@
 class CurrencyRate
-  include MongoMapper::Document
+  include DataMapper::Resource
 
-  key :sell_rate, Float
-  key :buy_rate, Float
-  key :medium_rate, Float
-  key :date, Date, :required => true
-  key :created_at, DateTime
-  key :updated_at, DateTime
+  property :id, Serial
+  property :sell_rate, Float
+  property :buy_rate, Float
+  property :medium_rate, Float
+  property :date, Date, :required => true
+  property :created_at, DateTime
+  property :updated_at, DateTime
 
   belongs_to :currency_source
   belongs_to :currency_code
