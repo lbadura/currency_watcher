@@ -1,8 +1,3 @@
-config = File.join(File.dirname(__FILE__), '..', 'config')
-$:.unshift config
-require 'boot'
-require 'currency_spy'
-
 class CurrencyHarvester
   def run
     # Harvest the data
@@ -56,4 +51,3 @@ class CurrencyHarvester
     return rate
   end
 end
-CurrencyHarvester.new.run
