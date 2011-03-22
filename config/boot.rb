@@ -43,14 +43,14 @@ module CurrencyWatcher
     end
 
     def production?
-      determine_environment == :production
+      determine_environment == 'production'
     end
 
     def determine_environment
       if defined?(settings)
         return settings.environment unless settings.environment.nil?
       else
-        return :development
+        return 'development'
       end
     end
   end
