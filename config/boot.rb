@@ -47,7 +47,7 @@ module CurrencyWatcher
     end
 
     def determine_environment
-      if defined?(settings)
+      if settings
         return settings.environment unless settings.environment.nil?
       else
         return 'development'
