@@ -16,7 +16,7 @@ class CurrencyHarvester
   protected
   def fetch_data(source)
     puts "Fetching data from #{source.name}"
-    scraper = source.scraper.constantize.new
+    scraper = CurrencySpy.const_get(source.scraper).new
     puts "\tAvailable currencies: #{scraper.available_codes.join(', ')}"
     scraper.available_codes.each do |code|
       scraper.currency_code = code

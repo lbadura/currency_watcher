@@ -5,9 +5,10 @@ require 'config/boot'
 namespace :setup do
   desc "Seeds the database with all required currency_sources"
   task :sources do
-    sources = [['NBP', 'CurrencySpy::Nbp'],
-      ['DnB Nord','CurrencySpy::DnbNord'],
-      ['Walutomat','CurrencySpy::Walutomat']].freeze
+    CurrencySource.all.destroy
+    sources = [['NBP', 'Nbp'],
+      ['DnB Nord','DnbNord'],
+      ['Walutomat','Walutomat']].freeze
 
     sources.each do |source|
       CurrencySource.first_or_create(:name => source[0], :scraper => source[1])
