@@ -16,11 +16,9 @@ namespace :setup do
   end
 end
 
-namespace :data do
-  desc "Fetch currency rates from known sources"
-  task :harvest do
-    require 'currency_spy'
-    require 'currency_harvester'
-    CurrencyHarvester.new.run
-  end
+desc "Fetch currency rates from known sources"
+task :cron => :environment do
+  require 'currency_spy'
+  require 'currency_harvester'
+  CurrencyHarvester.new.run
 end
