@@ -17,7 +17,7 @@ namespace :setup do
 end
 
 desc "Fetch currency rates from known sources"
-task :cron => :environment do
+task :cron do
   require 'currency_spy'
   require 'currency_harvester'
   CurrencyHarvester.new.run
