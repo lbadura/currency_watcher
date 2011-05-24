@@ -11,4 +11,12 @@ class CurrencyRate
 
   belongs_to :currency_source
   belongs_to :currency_code
+
+  def spread
+    if sell_rate.nil? || buy_rate.nil?
+      "b/d"
+    else
+      (sell_rate - buy_rate)
+    end
+  end
 end

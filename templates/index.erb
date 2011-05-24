@@ -1,69 +1,27 @@
-<table id="MainTable">
-  <thead>
-    <tr class="tablehead">
-      <th>Nazwa instytucji</th>
-      <th>Kupno</th>
-      <th>Sprzedaż</th>
-      <th>Kurs średni</th>
-      <th>Spread</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="TableRow">
-      <td>BZWBK S.A</td>
-      <td class="max">0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BRE BANK S.A</td>
-      <td class="min">0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BZWBK S.A</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BRE BANK S.A</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BZWBK S.A</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BRE BANK S.A</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BZWBK S.A</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-    <tr class="TableRow">
-      <td>BRE BANK S.A</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-      <td>0,00zł</td>
-    </tr>
-  </tbody>
-</table>
+<% if @currency_sources.empty? %>
+Brak danych do wyświetlenia
+<% else %>
+  <table id="MainTable">
+    <thead>
+      <tr class="tablehead">
+        <th>Nazwa instytucji</th>
+        <th>Kupno</th>
+        <th>Sprzedaż</th>
+        <th>Kurs średni</th>
+        <th>Spread</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @currency_sources.each do |source| %>
+          <% rate = source.currency_rates.all(:currency_code => CurrencyCode.first(:code => 'EUR')).last %>
+          <tr class="TableRow">
+            <td><%= source.name %></td>
+            <td class="max"><%= rate.buy_rate %></td>
+            <td><%= rate.sell_rate %></td>
+            <td><%= rate.medium_rate %></td>
+            <td><%= (rate.spread.to_f) %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -10,6 +10,7 @@ set :public, Proc.new { File.join(root, "public") }
 set :views, Proc.new { File.join(root, "templates") }
 
 get '/' do
+  @currency_sources = CurrencySource.all
   @currency_rates = CurrencyRate.all
   erb :index, :layout => :application
 end
