@@ -16,7 +16,8 @@ class CurrencyRate
     if sell_rate.nil? || buy_rate.nil?
       "b/d"
     else
-      (sell_rate - buy_rate)
+      percent = "%.2f" % (((sell_rate - buy_rate) / buy_rate) * 100)
+      "#{percent} %"
     end
   end
 end

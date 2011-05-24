@@ -17,10 +17,10 @@ Brak danych do wyświetlenia
           <% rate = source.currency_rates.all(:currency_code => CurrencyCode.first(:code => 'EUR')).last %>
           <tr class="TableRow">
             <td><%= source.name %></td>
-            <td class="max"><%= rate.buy_rate %></td>
+            <td><%= rate.buy_rate %></td>
             <td><%= rate.sell_rate %></td>
             <td><%= rate.medium_rate %></td>
-            <td><%= (rate.spread.to_f) %></td>
+            <td class="max"><%= rate.spread %></td>
             <td><%= (rate.date.to_s) %></td>
           </tr>
       <% end %>
