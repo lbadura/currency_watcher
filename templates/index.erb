@@ -9,6 +9,7 @@ Brak danych do wyświetlenia
         <th>Sprzedaż</th>
         <th>Kurs średni</th>
         <th>Spread</th>
+        <th>Data</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@ Brak danych do wyświetlenia
             <td><%= rate.sell_rate %></td>
             <td><%= rate.medium_rate %></td>
             <td><%= (rate.spread.to_f) %></td>
+            <td><%= (rate.date.to_s) %></td>
           </tr>
       <% end %>
     </tbody>
