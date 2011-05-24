@@ -96,10 +96,6 @@ td {
 	text-align: center;
 }
 
-td:hover {
-	background: #c4c4c4;	
-}
-
 td:first-of-type {
 	border-right: 1px solid #FFF;
 	border-left: 0;
@@ -146,6 +142,11 @@ ul a {
 
 ul a:hover {
 	background:url(../images/menu_hover.png) no-repeat;
+}
+
+ul a.active {
+	background:url(../images/menu_active.png) no-repeat;
+  cursor: default;
 }
 
 li.menu {
