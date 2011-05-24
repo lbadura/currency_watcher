@@ -1,9 +1,0 @@
-body {
-	behavior:url(csshover.htc);
-}
-.submitsearch {
-	padding: 24px 0 0 0;
-}
-#frmsearch {
-	background: url(../images/back_search.png) no-repeat 0 8px;
-}
