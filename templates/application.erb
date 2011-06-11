@@ -1,4 +1,4 @@
-<!doctype html> 
+<!doctype html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -6,6 +6,19 @@
     <link rel="stylesheet" type="text/css" href="style/style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
     <script src="script/cw.js" type="text/javascript"></script>
+    <!-- TODO: move analytics stuff to a partial -->
+    <% unless settings.environment == :development %>
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-23563834-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    <% end %>
     <script type="text/javascript" id="AdTaily_Widget" src="http://static.adtaily.pl/widget.js#CnNEnXQIU5ciWeu"></script>
     <noscript><a href="http://www.adtaily.pl">Prosta i tania reklama w Internecie sprzedawana za pomocą AdTaily</a>(PLALLADTAILY0002)</noscript>
   </head>
@@ -25,5 +38,5 @@
   <footer>
     Copyright &copy; 2011, <strong>Łukasz Badura</strong>. Contact: <a href="mailto:info@spread.com.pl">info@spread.com.pl</a>. Layout design: Marek Badura.
   </footer>
-</body>  
+</body>
 </html>
