@@ -13,4 +13,5 @@ group :development, :test do
   gem 'ruby-debug19'
   gem 'bson_ext'
   gem 'thin'
+  gem 'capistrano'
 end
