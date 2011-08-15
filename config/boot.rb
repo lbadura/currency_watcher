@@ -17,8 +17,9 @@ module CurrencyWatcher
       env = determine_environment
       config_file = YAML.load_file('config/database.yml')
       config = config_file[env.to_s]
-      ENV['DATABASE_URL'] || "postgres://#{config['user']}:#{config['password']}@#{config['host']}/#{config['database']}"
+      ENV['DATABASE_URL'] || "postgres://#{config['user']}:#{config['password']}@#{config['hostname']}/#{config['database']}"
     end
+
     def prepare_loadpaths
       dirs_to_load = ["models", "lib"]
       dirs_to_load.each do |dir_name|
